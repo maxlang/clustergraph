@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+.links line {
+  stroke: #999;
+  stroke-opacity: 0.6;
+}
+.nodes circle {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+</style>
+<svg width="960" height="600"></svg>
+<script src="./d3.js"></script>
+<script src="./lodash.js"></script>
+<script>
+
+let range = {
+      "span": {
+        "startKey": "/Min",
+        "endKey": "/System/tsd/cr.node.sql.mon.client.cur/6/10s/2017-01-31T16:00:00Z"
+      },
+      "raftState": {
+        "replicaId": "4",
+        "hardState": {
+          "term": "11",
+          "vote": "0",
+          "commit": "155963"
+        },
+        "lead": "2",
+        "state": "StateFollower",
+        "applied": "155963"
+      },
+      "state": {
+        "state": {
+          "raftAppliedIndex": "155963",
+          "leaseAppliedIndex": "144446",
+          "desc": {
+            "rangeId": "1",
+            "startKey": "",
+            "endKey": "BHRzZBJjci5ub2RlLnNxbC5tb24uY2xpZW50LmN1cgABifgGTEg2",
+            "replicas": [
+              {
+                "nodeId": 1,
+                "storeId": 1,
+                "replicaId": 1
+              },
+              {
+                "nodeId": 2,
+                "storeId": 2,
+                "replicaId": 2
+              },
+              {
+                "nodeId": 6,
+                "storeId": 6,
+                "replicaId": 4
+              }
+            ],
+            "nextReplicaId": 5
+          },
+          "lease": {
+            "start": {
+              "wallTime": "1485839775208345746",
+              "logical": 0
+            },
+            "expiration": {
+              "wallTime": "1485894686366700339",
+              "logical": 0
+            },
+            "replica": {
+              "nodeId": 2,
+              "storeId": 2,
+              "replicaId": 2
+            },
+            "deprecatedStartStasis": {
+              "wallTime": "1485894686366700339",
+              "logical": 0
+            },
+            "proposedTs": {
+              "wallTime": "1485894677366705839",
+              "logical": 0
+            }
+          },
+          "truncatedState": {
+            "index": "155828",
+            "term": "11"
+          },
+          "gcThreshold": {
+            "wallTime": "0",
+            "logical": 0
+          },
+          "stats": {
+            "containsEstimates": true,
+            "lastUpdateNanos": "1485894679672070552",
+            "intentAge": "0",
+            "gcBytesAge": "77162072175",
+            "liveBytes": "58629679",
+            "liveCount": "6474",
+            "keyBytes": "1193211",
+            "keyCount": "6475",
+            "valBytes": "60140091",
+            "valCount": "81429",
+            "intentBytes": "0",
+            "intentCount": "0",
+            "sysBytes": "1881",
+            "sysCount": "15"
+          },
+          "txnSpanGcThreshold": {
+            "wallTime": "0",
+            "logical": 0
+          },
+          "frozen": 2
+        },
+        "lastIndex": "155963",
+        "numPending": "0",
+        "numDropped": "0",
+        "raftLogSize": "723386"
+      }
+    };
+
+    // {"id": "Champtercier", "group": 1},
+    // {"source": "Mlle.Baptistine", "target": "Myriel", "value": 8},
+
+
+function calcNodesAndLinks(ranges) {
+
+  let nodeMap = {};
+  let linkMap = {};
+
+  _.each(ranges, (range) => {
+    let replicas = _.sortBy(range.state && range.state.state && range.state.state.desc && range.state.state.desc.replicas, (r)=> r.nodeId);
+    _.each(replicas, (replica, idx) => {
+      // TODO: handle multiple stores on a node
+      if (!_.has(nodeMap, replica.nodeId)) {
+        nodeMap[replica.nodeId] = {id: replica.nodeId, group: 1};
+      }
+      for (let i = idx + 1; i < replicas.length; i++ ){
+        let replicaPair = replica.nodeId + ":" + replicas[i].nodeId;
+        if (!_.has(linkMap, replicaPair)){
+          linkMap[replicaPair] = {source: replica.nodeId, target: replica.nodeId, value: 0};
+        }
+        linkMap[replicaPair].value += 1;
+      }
+    });
+  });
+
+  return {
+    nodes: _.values(nodeMap),
+    links: _.values(linkMap),
+  }
+}
+
+var svg = d3.select("svg"),
+    width = +svg.attr("width"),
+    height = +svg.attr("height");
+var color = d3.scale.ordinal(d3.schemeCategory20);
+var simulation = d3.layout.force()
+    .charge(10);
+d3.json("ranges.json", function(error, ranges) {
+  let graph = calcNodesAndLinks(ranges.ranges);
+  console.log("graph", graph);
+  if (error) throw error;
+  var link = svg.append("g")
+      .attr("class", "links")
+    .selectAll("line")
+    .data(graph.links)
+    .enter().append("line")
+      .attr("stroke-width", function(d) { return Math.sqrt(d.value); });
+  var node = svg.append("g")
+      .attr("class", "nodes")
+    .selectAll("circle")
+    .data(graph.nodes)
+    .enter().append("circle")
+      .attr("r", 5)
+      .attr("fill", function(d) { return color(d.group); });
+      // .call(d3.drag()
+      //     .on("start", dragstarted)
+      //     .on("drag", dragged)
+      //     .on("end", dragended));
+  node.append("title")
+      .text(function(d) { return d.id; });
+  simulation
+      .nodes(graph.nodes)
+      .on("tick", ticked);
+  simulation
+      .links(graph.links);
+  function ticked() {
+    link
+        .attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+    node
+        .attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; });
+  }
+});
+function dragstarted(d) {
+  if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+  d.fx = d.x;
+  d.fy = d.y;
+}
+function dragged(d) {
+  d.fx = d3.event.x;
+  d.fy = d3.event.y;
+}
+function dragended(d) {
+  if (!d3.event.active) simulation.alphaTarget(0);
+  d.fx = null;
+  d.fy = null;
+}
+</script>
