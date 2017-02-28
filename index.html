@@ -259,9 +259,13 @@
         return;
       }
 
+      console.log("nodes", nodes);
+
       let stat = location.search.replace("?q=", "") || "sys.cpu.user.percent";
 
-      let max = (nodes && stat && _.maxBy(nodes.nodes, (v) => v.metrics[stat]).metrics[stat]) || 1;
+      let maxNode = _.maxBy(nodes.nodes, (v) => v.metrics[stat]);
+
+      let max = (maxNode && maxNode.metrics && maxNode.metrics[stat]) || 1;
 
       console.log("max", max);
 
