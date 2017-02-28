@@ -10,160 +10,267 @@
   stroke-width: 1.5px;
 }
 </style>
+
+<select width="200px" style="width:3000px">
+<option>build.timestamp</option>
+<option>clock-offset.meannanos</option>
+<option>clock-offset.stddevnanos</option>
+<option>distsender.batches</option>
+<option>distsender.batches.partial</option>
+<option>distsender.errors.notleaseholder</option>
+<option>distsender.rpc.sent</option>
+<option>distsender.rpc.sent.local</option>
+<option>distsender.rpc.sent.nextreplicaerror</option>
+<option>distsender.rpc.sent.sendnexttimeout</option>
+<option>exec.error</option>
+<option>exec.latency-max</option>
+<option>exec.latency-p50</option>
+<option>exec.latency-p75</option>
+<option>exec.latency-p90</option>
+<option>exec.latency-p99</option>
+<option>exec.latency-p99.9</option>
+<option>exec.latency-p99.99</option>
+<option>exec.latency-p99.999</option>
+<option>exec.success</option>
+<option>gossip.bytes.received</option>
+<option>gossip.bytes.sent</option>
+<option>gossip.connections.incoming</option>
+<option>gossip.connections.outgoing</option>
+<option>gossip.connections.refused</option>
+<option>gossip.infos.received</option>
+<option>gossip.infos.sent</option>
+<option>liveness.epochincrements</option>
+<option>liveness.heartbeatfailures</option>
+<option>liveness.heartbeatsuccesses</option>
+<option>liveness.livenodes</option>
+<option>requests.slow.distsender</option>
+<option>sql.bytesin</option>
+<option>sql.bytesout</option>
+<option>sql.conns</option>
+<option>sql.ddl.count</option>
+<option>sql.delete.count</option>
+<option>sql.distsql.select.count</option>
+<option>sql.insert.count</option>
+<option>sql.latency-max</option>
+<option>sql.latency-p50</option>
+<option>sql.latency-p75</option>
+<option>sql.latency-p90</option>
+<option>sql.latency-p99</option>
+<option>sql.latency-p99.9</option>
+<option>sql.latency-p99.99</option>
+<option>sql.latency-p99.999</option>
+<option>sql.misc.count</option>
+<option>sql.mon.admin.cur</option>
+<option>sql.mon.admin.max-max</option>
+<option>sql.mon.admin.max-p50</option>
+<option>sql.mon.admin.max-p75</option>
+<option>sql.mon.admin.max-p90</option>
+<option>sql.mon.admin.max-p99</option>
+<option>sql.mon.admin.max-p99.9</option>
+<option>sql.mon.admin.max-p99.99</option>
+<option>sql.mon.admin.max-p99.999</option>
+<option>sql.mon.admin.session.cur</option>
+<option>sql.mon.admin.session.max-max</option>
+<option>sql.mon.admin.session.max-p50</option>
+<option>sql.mon.admin.session.max-p75</option>
+<option>sql.mon.admin.session.max-p90</option>
+<option>sql.mon.admin.session.max-p99</option>
+<option>sql.mon.admin.session.max-p99.9</option>
+<option>sql.mon.admin.session.max-p99.99</option>
+<option>sql.mon.admin.session.max-p99.999</option>
+<option>sql.mon.admin.txn.cur</option>
+<option>sql.mon.admin.txn.max-max</option>
+<option>sql.mon.admin.txn.max-p50</option>
+<option>sql.mon.admin.txn.max-p75</option>
+<option>sql.mon.admin.txn.max-p90</option>
+<option>sql.mon.admin.txn.max-p99</option>
+<option>sql.mon.admin.txn.max-p99.9</option>
+<option>sql.mon.admin.txn.max-p99.99</option>
+<option>sql.mon.admin.txn.max-p99.999</option>
+<option>sql.mon.client.cur</option>
+<option>sql.mon.client.max-max</option>
+<option>sql.mon.client.max-p50</option>
+<option>sql.mon.client.max-p75</option>
+<option>sql.mon.client.max-p90</option>
+<option>sql.mon.client.max-p99</option>
+<option>sql.mon.client.max-p99.9</option>
+<option>sql.mon.client.max-p99.99</option>
+<option>sql.mon.client.max-p99.999</option>
+<option>sql.mon.client.session.cur</option>
+<option>sql.mon.client.session.max-max</option>
+<option>sql.mon.client.session.max-p50</option>
+<option>sql.mon.client.session.max-p75</option>
+<option>sql.mon.client.session.max-p90</option>
+<option>sql.mon.client.session.max-p99</option>
+<option>sql.mon.client.session.max-p99.9</option>
+<option>sql.mon.client.session.max-p99.99</option>
+<option>sql.mon.client.session.max-p99.999</option>
+<option>sql.mon.client.txn.cur</option>
+<option>sql.mon.client.txn.max-max</option>
+<option>sql.mon.client.txn.max-p50</option>
+<option>sql.mon.client.txn.max-p75</option>
+<option>sql.mon.client.txn.max-p90</option>
+<option>sql.mon.client.txn.max-p99</option>
+<option>sql.mon.client.txn.max-p99.9</option>
+<option>sql.mon.client.txn.max-p99.99</option>
+<option>sql.mon.client.txn.max-p99.999</option>
+<option>sql.mon.conns.cur</option>
+<option>sql.mon.conns.max-max</option>
+<option>sql.mon.conns.max-p50</option>
+<option>sql.mon.conns.max-p75</option>
+<option>sql.mon.conns.max-p90</option>
+<option>sql.mon.conns.max-p99</option>
+<option>sql.mon.conns.max-p99.9</option>
+<option>sql.mon.conns.max-p99.99</option>
+<option>sql.mon.conns.max-p99.999</option>
+<option>sql.mon.conns.session.cur</option>
+<option>sql.mon.conns.session.max-max</option>
+<option>sql.mon.conns.session.max-p50</option>
+<option>sql.mon.conns.session.max-p75</option>
+<option>sql.mon.conns.session.max-p90</option>
+<option>sql.mon.conns.session.max-p99</option>
+<option>sql.mon.conns.session.max-p99.9</option>
+<option>sql.mon.conns.session.max-p99.99</option>
+<option>sql.mon.conns.session.max-p99.999</option>
+<option>sql.mon.conns.txn.cur</option>
+<option>sql.mon.conns.txn.max-max</option>
+<option>sql.mon.conns.txn.max-p50</option>
+<option>sql.mon.conns.txn.max-p75</option>
+<option>sql.mon.conns.txn.max-p90</option>
+<option>sql.mon.conns.txn.max-p99</option>
+<option>sql.mon.conns.txn.max-p99.9</option>
+<option>sql.mon.conns.txn.max-p99.99</option>
+<option>sql.mon.conns.txn.max-p99.999</option>
+<option>sql.mon.internal.cur</option>
+<option>sql.mon.internal.max-max</option>
+<option>sql.mon.internal.max-p50</option>
+<option>sql.mon.internal.max-p75</option>
+<option>sql.mon.internal.max-p90</option>
+<option>sql.mon.internal.max-p99</option>
+<option>sql.mon.internal.max-p99.9</option>
+<option>sql.mon.internal.max-p99.99</option>
+<option>sql.mon.internal.max-p99.999</option>
+<option>sql.mon.internal.session.cur</option>
+<option>sql.mon.internal.session.max-max</option>
+<option>sql.mon.internal.session.max-p50</option>
+<option>sql.mon.internal.session.max-p75</option>
+<option>sql.mon.internal.session.max-p90</option>
+<option>sql.mon.internal.session.max-p99</option>
+<option>sql.mon.internal.session.max-p99.9</option>
+<option>sql.mon.internal.session.max-p99.99</option>
+<option>sql.mon.internal.session.max-p99.999</option>
+<option>sql.mon.internal.txn.cur</option>
+<option>sql.mon.internal.txn.max-max</option>
+<option>sql.mon.internal.txn.max-p50</option>
+<option>sql.mon.internal.txn.max-p75</option>
+<option>sql.mon.internal.txn.max-p90</option>
+<option>sql.mon.internal.txn.max-p99</option>
+<option>sql.mon.internal.txn.max-p99.9</option>
+<option>sql.mon.internal.txn.max-p99.99</option>
+<option>sql.mon.internal.txn.max-p99.999</option>
+<option>sql.query.count</option>
+<option>sql.select.count</option>
+<option>sql.txn.abort.count</option>
+<option>sql.txn.begin.count</option>
+<option>sql.txn.commit.count</option>
+<option>sql.txn.rollback.count</option>
+<option>sql.update.count</option>
+<option>sys.cgo.allocbytes</option>
+<option>sys.cgo.totalbytes</option>
+<option>sys.cgocalls</option>
+<option>sys.cpu.sys.ns</option>
+<option>sys.cpu.sys.percent</option>
+<option>sys.cpu.user.ns</option>
+<option>sys.cpu.user.percent</option>
+<option>sys.fd.open</option>
+<option>sys.fd.softlimit</option>
+<option>sys.gc.count</option>
+<option>sys.gc.pause.ns</option>
+<option>sys.gc.pause.percent</option>
+<option>sys.go.allocbytes</option>
+<option>sys.go.totalbytes</option>
+<option>sys.goroutines</option>
+<option>sys.rss</option>
+<option>sys.uptime</option>
+<option>txn.abandons</option>
+<option>txn.aborts</option>
+<option>txn.commits</option>
+<option>txn.commits1PC</option>
+<option>txn.durations-max</option>
+<option>txn.durations-p50</option>
+<option>txn.durations-p75</option>
+<option>txn.durations-p90</option>
+<option>txn.durations-p99</option>
+<option>txn.durations-p99.9</option>
+<option>txn.durations-p99.99</option>
+<option>txn.durations-p99.999</option>
+<option>txn.restarts-max</option>
+<option>txn.restarts-p50</option>
+<option>txn.restarts-p75</option>
+<option>txn.restarts-p90</option>
+<option>txn.restarts-p99</option>
+<option>txn.restarts-p99.9</option>
+<option>txn.restarts-p99.99</option>
+<option>txn.restarts-p99.999</option>
+</select>
+
 <svg width="960" height="600"></svg>
-<!-- <script src="./d3.js"></script>-->
-<script src="https://d3js.org/d3.v4.min.js"></script>
-<script src="./lodash.js"></script>
+<script src="./node_modules/d3/build/d3.js"></script>
+<script src="./node_modules/lodash/lodash.js"></script>
+<script src="./node_modules/jquery/dist/jquery.js"></script>
+<script src="./node_modules/select2/dist/js/select2.js"></script>
+<link href="./node_modules/select2/dist/css/select2.css" rel="stylesheet" />
+
 <script>
 
-let range = {
-      "span": {
-        "startKey": "/Min",
-        "endKey": "/System/tsd/cr.node.sql.mon.client.cur/6/10s/2017-01-31T16:00:00Z"
-      },
-      "raftState": {
-        "replicaId": "4",
-        "hardState": {
-          "term": "11",
-          "vote": "0",
-          "commit": "155963"
-        },
-        "lead": "2",
-        "state": "StateFollower",
-        "applied": "155963"
-      },
-      "state": {
-        "state": {
-          "raftAppliedIndex": "155963",
-          "leaseAppliedIndex": "144446",
-          "desc": {
-            "rangeId": "1",
-            "startKey": "",
-            "endKey": "BHRzZBJjci5ub2RlLnNxbC5tb24uY2xpZW50LmN1cgABifgGTEg2",
-            "replicas": [
-              {
-                "nodeId": 1,
-                "storeId": 1,
-                "replicaId": 1
-              },
-              {
-                "nodeId": 2,
-                "storeId": 2,
-                "replicaId": 2
-              },
-              {
-                "nodeId": 6,
-                "storeId": 6,
-                "replicaId": 4
-              }
-            ],
-            "nextReplicaId": 5
-          },
-          "lease": {
-            "start": {
-              "wallTime": "1485839775208345746",
-              "logical": 0
-            },
-            "expiration": {
-              "wallTime": "1485894686366700339",
-              "logical": 0
-            },
-            "replica": {
-              "nodeId": 2,
-              "storeId": 2,
-              "replicaId": 2
-            },
-            "deprecatedStartStasis": {
-              "wallTime": "1485894686366700339",
-              "logical": 0
-            },
-            "proposedTs": {
-              "wallTime": "1485894677366705839",
-              "logical": 0
-            }
-          },
-          "truncatedState": {
-            "index": "155828",
-            "term": "11"
-          },
-          "gcThreshold": {
-            "wallTime": "0",
-            "logical": 0
-          },
-          "stats": {
-            "containsEstimates": true,
-            "lastUpdateNanos": "1485894679672070552",
-            "intentAge": "0",
-            "gcBytesAge": "77162072175",
-            "liveBytes": "58629679",
-            "liveCount": "6474",
-            "keyBytes": "1193211",
-            "keyCount": "6475",
-            "valBytes": "60140091",
-            "valCount": "81429",
-            "intentBytes": "0",
-            "intentCount": "0",
-            "sysBytes": "1881",
-            "sysCount": "15"
-          },
-          "txnSpanGcThreshold": {
-            "wallTime": "0",
-            "logical": 0
-          },
-          "frozen": 2
-        },
-        "lastIndex": "155963",
-        "numPending": "0",
-        "numDropped": "0",
-        "raftLogSize": "723386"
-      }
-    };
+function calcNodesAndLinks(n) {
 
-    // {"id": "Champtercier", "group": 1},
-    // {"source": "Mlle.Baptistine", "target": "Myriel", "value": 8},
+  let nodes = _.map(n, (v)=> { return {id: v.desc.nodeId, metrics: v.metrics}; });
+  let links = _.map(n, (v,k)=>{
+    return {source: v.desc.nodeId, target: (k === n.length - 1) ? n[0].desc.nodeId : n[k + 1].desc.nodeId };
+  });
+  return {nodes, links};
+}
 
-
-function calcNodesAndLinks(ranges) {
-
-  let nodeMap = {};
-  let linkMap = {};
-
-  _.each(ranges, (range) => {
-    let replicas = _.sortBy(range.state && range.state.state && range.state.state.desc && range.state.state.desc.replicas, (r)=> r.nodeId);
-    _.each(replicas, (replica, idx) => {
-      // TODO: handle multiple stores on a node
-      if (!_.has(nodeMap, replica.nodeId)) {
-        nodeMap[replica.nodeId] = {id: replica.nodeId, group: 1};
-      }
-      for (let i = idx + 1; i < replicas.length; i++ ){
-        let replicaPair = replica.nodeId + ":" + replicas[i].nodeId;
-        if (!_.has(linkMap, replicaPair)){
-          linkMap[replicaPair] = {source: replica.nodeId, target: replicas[i].nodeId, value: 0};
-        }
-        linkMap[replicaPair].value += 1;
-      }
-    });
+  let select = $('select').select2().on('select2:select', (evt) => {
+    location.replace(location.href.replace(/\?q=.*/,"").replace(/$/,`?q=${evt.params.data.id}`));
   });
 
-  return {
-    nodes: _.values(nodeMap),
-    links: _.values(linkMap),
-  }
-}
+function redrawGraph() {
 
 var svg = d3.select("svg"),
     width = +svg.attr("width"),
     height = +svg.attr("height");
 
+svg.html("");
+
 var color = d3.scaleOrdinal(d3.schemeCategory20);
 
 var simulation = d3.forceSimulation()
     .force("link", d3.forceLink().id(function(d) { return d.id; }))
-    .force("charge", d3.forceManyBody().strength(-2000))
+    .force("charge", d3.forceManyBody().strength(-300))
     .force("center", d3.forceCenter(width / 2, height / 2));
 
-d3.json("ranges.json", function(error, ranges) {
-  let graph = calcNodesAndLinks(ranges.ranges);
+d3.json("/_status/nodes", function(error, nodes) {
+
+  if (error || !nodes) {
+    console.error("no data", error);
+    return;
+  }
+
+  let stat=location.search.replace("?q=","") || "sys.cpu.user.percent";
+
+  let max = (nodes && stat && _.maxBy(nodes.nodes, (v) => v.metrics[stat]).metrics[stat]) || 1;
+
+  console.log("max", max);
+
+  let target = 25;
+
+  let factor = 25/max;
+
+  console.log("stat", stat, factor);
+
+  let graph = calcNodesAndLinks(nodes.nodes);
   console.log("graph", _.cloneDeep(graph));
   if (error) throw error;
   var link = svg.append("g")
@@ -171,22 +278,29 @@ d3.json("ranges.json", function(error, ranges) {
     .selectAll("line")
     .data(graph.links)
     .enter().append("line")
-      .attr("stroke-width", function(d) { return Math.sqrt(d.value); });
+      .attr("stroke-width", 0); //function(d) { return Math.sqrt(d.value); });
 
   var node = svg.append("g")
       .attr("class", "nodes")
-    .selectAll("circle")
+    .selectAll(".test")
     .data(graph.nodes)
-    .enter().append("circle")
-      .attr("r", 20)
+    .enter().append("g").attr("class", "test");
+      // .attr("r", (d) => d.count/100)
+
+node.append("circle")
+      .attr("r", (d) => d.metrics[stat] * factor)
       .attr("fill", function(d) { return color(d.group); })
       .call(d3.drag()
           .on("start", dragstarted)
           .on("drag", dragged)
           .on("end", dragended));
 
+node.append("text")
+  .text((d) => `node ${d.id} : ${stat}=${d.metrics[stat]}`);
+
   node.append("title")
-      .text(function(d) { return d.id; });
+  .text((d) => `node ${d.id} : ${stat}=${d.metrics[stat]}`);
+
 
   simulation
       .nodes(graph.nodes)
@@ -203,6 +317,7 @@ d3.json("ranges.json", function(error, ranges) {
         .attr("y2", function(d) { return d.target.y; });
 
     node
+        .attr("transform", (d)=>`translate(${d.x},${d.y})`)
         .attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; });
   }
@@ -224,5 +339,10 @@ function dragended(d) {
   d.fx = null;
   d.fy = null;
 }
+
+}
+
+redrawGraph();
+
 
 </script>
