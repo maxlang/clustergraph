@@ -1,0 +1,35 @@
+ti-select begin—long press, gutter tap, or command?'],render:()=>noteShell(`<h2>Top priorities</h2>${line('Finish investor update deck — send by 10am',{urgent:true})}${line('Outline the retention argument — 20 min',{trail:'Promotion rec.'})}<h2>Work</h2>${line('Review Q2 KPIs with team')}${line('Prep roadmap sync')}${line('Call pediatrician',{tag:'#task'})}<h2 class="collapsed">▸ Family <span>4 hidden</span></h2><p>Need to keep enough time before lunch and nap.</p>`,{after:mobileAccessory()})}
+];
+let current=0, view='desktop';
+const params=new URLSearchParams(location.search); if(params.has('frame')) current=Math.max(0,Math.min(frames.length-1,Number(params.get('frame'))-1)); if(params.get('view')==='mobile') view='mobile';
+let reviews={}; try{reviews=JSON.parse(localStorage.getItem('taskStoryboardV2Reviews')||'{}')}catch(e){}
+function persist(){localStorage.setItem('taskStoryboardV2Reviews',JSON.stringify(reviews))}
+function render(){
+ const f=frames[current]; const mobile=f.forceMobile||view==='mobile';
+ document.getElementById('stage').classList.toggle('mobile',mobile);
+ document.getElementById('canvas').innerHTML=f.render();
+ document.getElementById('stageLabel').textContent=`Frame ${current+1} of ${frames.length}`;
+ document.getElementById('modeLabel').textContent=f.mode;
+ document.getElementById('panelMode').textContent=f.mode;
+ document.getElementById('panelTitle').textContent=f.title;
+ document.getElementById('panelAction').textContent=f.action;
+ document.getElementById('panelEffect').textContent=f.effect;
+ document.getElementById('panelWatch').innerHTML=f.watch.map(x=>`<li>${esc(x)}</li>`).join('');
+ document.getElementById('frameSelect').value=current;
+ document.querySelectorAll('#frameNav button').forEach((b,i)=>b.classList.toggle('active',i===current));
+ document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===(mobile?'mobile':'desktop')));
+ document.getElementById('prev').disabled=current===0;document.getElementById('next').disabled=current===frames.length-1;
+ const r=reviews[current]||{}; document.querySelectorAll('[data-rating]').forEach(b=>b.classList.toggle('active',b.dataset.rating===r.rating)); document.getElementById('notes').value=r.notes||'';
+}
+function go(n){current=Math.max(0,Math.min(frames.length-1,n));render();}
+const select=document.getElementById('frameSelect');
+let lastGroup=''; frames.forEach((f,i)=>{if(f.group!==lastGroup){const g=document.createElement('div');g.className='group';g.textContent=f.group;document.getElementById('frameNav').appendChild(g);lastGroup=f.group}const o=document.createElement('option');o.value=i;o.textContent=f.title;select.appendChild(o);const b=document.createElement('button');b.textContent=f.title;b.onclick=()=>go(i);document.getElementById('frameNav').appendChild(b)});
+select.onchange=e=>go(Number(e.target.value));document.getElementById('prev').onclick=()=>go(current-1);document.getElementById('next').onclick=()=>go(current+1);
+document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{view=b.dataset.view;render()});
+document.querySelectorAll('[data-rating]').forEach(b=>b.onclick=()=>{reviews[current]={...(reviews[current]||{}),rating:b.dataset.rating,notes:document.getElementById('notes').value};persist();render()});
+document.getElementById('notes').oninput=e=>{reviews[current]={...(reviews[current]||{}),notes:e.target.value};persist()};
+document.getElementById('export').onclick=()=>{const blob=new Blob([JSON.stringify({version:2,exportedAt:new Date().toISOString(),reviews},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='task-system-storyboard-v2-review.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)};
+render();
+</script>
+</body>
+</html>
