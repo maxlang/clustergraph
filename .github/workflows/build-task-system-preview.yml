@@ -1,0 +1,47 @@
+name: Build task-system preview
+
+on:
+  push:
+    branches:
+      - task-system-preview-20260823
+    paths:
+      - task-system-preview/chunk-*.txt
+      - .github/workflows/build-task-system-preview.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: task-system-preview-20260823
+      - name: Build self-contained storyboard
+        run: |
+          cat \
+            task-system-preview/chunk-001.txt \
+            task-system-preview/chunk-002.txt \
+            task-system-preview/chunk-003.txt \
+            task-system-preview/chunk-004.txt \
+            task-system-preview/chunk-005.txt \
+            task-system-preview/chunk-006a.txt \
+            task-system-preview/chunk-006b.txt \
+            task-system-preview/chunk-007.txt \
+            > task-system-preview/storyboard.html
+          test -s task-system-preview/storyboard.html
+          grep -q 'id="canvas"' task-system-preview/storyboard.html
+          grep -q 'const frames=' task-system-preview/storyboard.html
+      - name: Commit built page
+        run: |
+          if git diff --quiet -- task-system-preview/storyboard.html; then
+            echo "storyboard.html already current"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add task-system-preview/storyboard.html
+          git commit -m "Build self-contained task storyboard [skip ci]"
+          git push origin HEAD:task-system-preview-20260823
